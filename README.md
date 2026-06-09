@@ -399,3 +399,149 @@ tk.Button(
     **button_style
 ).pack(pady=10)
         
+
+
+
+
+
+
+
+# ==========================================
+# MODERN GUI
+# ==========================================
+
+root = tk.Tk()
+root.title("Monthly NAV Variance Analyzer")
+root.geometry("700x550")
+root.configure(bg="#1E293B")
+root.resizable(False, False)
+
+# ------------------------------------------
+# TITLE
+# ------------------------------------------
+
+title_label = tk.Label(
+    root,
+    text="Monthly NAV Variance Analyzer",
+    font=("Segoe UI", 22, "bold"),
+    bg="#1E293B",
+    fg="white"
+)
+
+title_label.pack(pady=(25, 10))
+
+subtitle_label = tk.Label(
+    root,
+    text="CRMO Monthly Variance Reporting Tool",
+    font=("Segoe UI", 10),
+    bg="#1E293B",
+    fg="#CBD5E1"
+)
+
+subtitle_label.pack(pady=(0, 25))
+
+# ------------------------------------------
+# BUTTON STYLE
+# ------------------------------------------
+
+button_style = {
+    "font": ("Segoe UI", 14, "bold"),
+    "bg": "#2563EB",
+    "fg": "white",
+    "activebackground": "#1D4ED8",
+    "activeforeground": "white",
+    "width": 28,
+    "height": 2,
+    "bd": 0,
+    "cursor": "hand2"
+}
+
+# ------------------------------------------
+# WORKFLOW BUTTON
+# ------------------------------------------
+
+workflow_btn = tk.Button(
+    root,
+    text="Select Workflow",
+    command=select_workflow,
+    **button_style
+)
+
+workflow_btn.pack(pady=10)
+
+# ------------------------------------------
+# LV BUTTON
+# ------------------------------------------
+
+lv_btn = tk.Button(
+    root,
+    text="Select LV Report",
+    command=select_lv,
+    **button_style
+)
+
+lv_btn.pack(pady=10)
+
+# ------------------------------------------
+# WCR BUTTON
+# ------------------------------------------
+
+wcr_btn = tk.Button(
+    root,
+    text="Select WCR Report",
+    command=select_wcr,
+    **button_style
+)
+
+wcr_btn.pack(pady=10)
+
+# ------------------------------------------
+# RUN BUTTON
+# ------------------------------------------
+
+run_btn = tk.Button(
+    root,
+    text="Run Extraction",
+    command=run_extraction,
+    font=("Segoe UI", 15, "bold"),
+    bg="#16A34A",
+    fg="white",
+    activebackground="#15803D",
+    activeforeground="white",
+    width=28,
+    height=2,
+    bd=0,
+    cursor="hand2"
+)
+
+run_btn.pack(pady=30)
+
+# ------------------------------------------
+# STATUS LABEL
+# ------------------------------------------
+
+status_label = tk.Label(
+    root,
+    text="Ready",
+    font=("Segoe UI", 11, "italic"),
+    bg="#1E293B",
+    fg="#94A3B8"
+)
+
+status_label.pack(pady=5)
+
+# ------------------------------------------
+# FOOTER
+# ------------------------------------------
+
+footer_label = tk.Label(
+    root,
+    text="JPMC CRMO Automation | Monthly Variance Reporting",
+    font=("Segoe UI", 9),
+    bg="#1E293B",
+    fg="#64748B"
+)
+
+footer_label.pack(side="bottom", pady=15)
+
+root.mainloop()
