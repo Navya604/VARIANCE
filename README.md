@@ -270,3 +270,132 @@ run_btn = tk.Button(
 run_btn.pack(pady=25)
 
 root.mainloop()
+
+
+
+
+
+
+# ----------------------------------------
+# FIX ID FORMATS
+# ----------------------------------------
+
+lv["Fund UCN"] = (
+    lv["Fund UCN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+    .str.zfill(10)
+)
+
+wf["Fund UCN"] = (
+    wf["Fund UCN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+    .str.zfill(10)
+)
+
+wf["IA UCN"] = (
+    wf["IA UCN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+    .str.zfill(10)
+)
+
+lv["Fund SPN"] = (
+    lv["Fund SPN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+)
+
+wf["Fund SPN"] = (
+    wf["Fund SPN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+)
+
+lv["Family UCN"] = (
+    lv["Family UCN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+    .str.zfill(10)
+)
+
+lv["Family SPN"] = (
+    lv["Family SPN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+)
+
+
+
+
+
+
+
+def select_wcr():
+    global wcr_path
+
+    wcr_path = filedialog.askopenfilename(
+        title="Select WCR Report",
+        filetypes=[("Excel Files", "*.xlsx")]
+    )
+
+    if wcr_path:
+        messagebox.showinfo(
+            "Selected",
+            f"WCR File Selected:\n{wcr_path}"
+        )
+
+
+
+
+# ---------------------------------
+# WCR MERGE
+# ---------------------------------
+
+wcr["UCN (Client)"] = (
+    wcr["UCN (Client)"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+)
+
+merged["Fund UCN"] = (
+    merged["Fund UCN"]
+    .astype(str)
+    .str.replace(".0", "", regex=False)
+    .str.strip()
+)
+
+merged = merged.merge(
+    wcr[
+        [
+            "UCN (Client)",
+            "Credit Contact Name (Out Oblg)",
+            "Prim Credit Officer",
+            "Supervisory Credit Officer"
+        ]
+    ],
+    left_on="Fund UCN",
+    right_on="UCN (Client)",
+    how="left"
+)
+
+
+
+
+
+tk.Button(
+    root,
+    text="Select WCR Report",
+    command=select_wcr,
+    **button_style
+).pack(pady=10)
+        
